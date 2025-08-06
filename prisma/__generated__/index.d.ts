@@ -2296,6 +2296,7 @@ export namespace Prisma {
     id: string | null
     type: string | null
     provider: string | null
+    providerAccountId: string | null
     refreshToken: string | null
     accessToken: string | null
     expiresAt: number | null
@@ -2308,6 +2309,7 @@ export namespace Prisma {
     id: string | null
     type: string | null
     provider: string | null
+    providerAccountId: string | null
     refreshToken: string | null
     accessToken: string | null
     expiresAt: number | null
@@ -2320,6 +2322,7 @@ export namespace Prisma {
     id: number
     type: number
     provider: number
+    providerAccountId: number
     refreshToken: number
     accessToken: number
     expiresAt: number
@@ -2342,6 +2345,7 @@ export namespace Prisma {
     id?: true
     type?: true
     provider?: true
+    providerAccountId?: true
     refreshToken?: true
     accessToken?: true
     expiresAt?: true
@@ -2354,6 +2358,7 @@ export namespace Prisma {
     id?: true
     type?: true
     provider?: true
+    providerAccountId?: true
     refreshToken?: true
     accessToken?: true
     expiresAt?: true
@@ -2366,6 +2371,7 @@ export namespace Prisma {
     id?: true
     type?: true
     provider?: true
+    providerAccountId?: true
     refreshToken?: true
     accessToken?: true
     expiresAt?: true
@@ -2465,6 +2471,7 @@ export namespace Prisma {
     id: string
     type: string
     provider: string
+    providerAccountId: string
     refreshToken: string | null
     accessToken: string | null
     expiresAt: number
@@ -2496,6 +2503,7 @@ export namespace Prisma {
     id?: boolean
     type?: boolean
     provider?: boolean
+    providerAccountId?: boolean
     refreshToken?: boolean
     accessToken?: boolean
     expiresAt?: boolean
@@ -2509,6 +2517,7 @@ export namespace Prisma {
     id?: boolean
     type?: boolean
     provider?: boolean
+    providerAccountId?: boolean
     refreshToken?: boolean
     accessToken?: boolean
     expiresAt?: boolean
@@ -2522,6 +2531,7 @@ export namespace Prisma {
     id?: boolean
     type?: boolean
     provider?: boolean
+    providerAccountId?: boolean
     refreshToken?: boolean
     accessToken?: boolean
     expiresAt?: boolean
@@ -2535,6 +2545,7 @@ export namespace Prisma {
     id?: boolean
     type?: boolean
     provider?: boolean
+    providerAccountId?: boolean
     refreshToken?: boolean
     accessToken?: boolean
     expiresAt?: boolean
@@ -2543,7 +2554,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type AccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "type" | "provider" | "refreshToken" | "accessToken" | "expiresAt" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["account"]>
+  export type AccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "type" | "provider" | "providerAccountId" | "refreshToken" | "accessToken" | "expiresAt" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["account"]>
   export type AccountInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Account$userArgs<ExtArgs>
   }
@@ -2563,6 +2574,7 @@ export namespace Prisma {
       id: string
       type: string
       provider: string
+      providerAccountId: string
       refreshToken: string | null
       accessToken: string | null
       expiresAt: number
@@ -2996,6 +3008,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Account", 'String'>
     readonly type: FieldRef<"Account", 'String'>
     readonly provider: FieldRef<"Account", 'String'>
+    readonly providerAccountId: FieldRef<"Account", 'String'>
     readonly refreshToken: FieldRef<"Account", 'String'>
     readonly accessToken: FieldRef<"Account", 'String'>
     readonly expiresAt: FieldRef<"Account", 'Int'>
@@ -4491,6 +4504,7 @@ export namespace Prisma {
     id: 'id',
     type: 'type',
     provider: 'provider',
+    providerAccountId: 'providerAccountId',
     refreshToken: 'refreshToken',
     accessToken: 'accessToken',
     expiresAt: 'expiresAt',
@@ -4744,6 +4758,7 @@ export namespace Prisma {
     id?: StringFilter<"Account"> | string
     type?: StringFilter<"Account"> | string
     provider?: StringFilter<"Account"> | string
+    providerAccountId?: StringFilter<"Account"> | string
     refreshToken?: StringNullableFilter<"Account"> | string | null
     accessToken?: StringNullableFilter<"Account"> | string | null
     expiresAt?: IntFilter<"Account"> | number
@@ -4757,6 +4772,7 @@ export namespace Prisma {
     id?: SortOrder
     type?: SortOrder
     provider?: SortOrder
+    providerAccountId?: SortOrder
     refreshToken?: SortOrderInput | SortOrder
     accessToken?: SortOrderInput | SortOrder
     expiresAt?: SortOrder
@@ -4773,6 +4789,7 @@ export namespace Prisma {
     NOT?: AccountWhereInput | AccountWhereInput[]
     type?: StringFilter<"Account"> | string
     provider?: StringFilter<"Account"> | string
+    providerAccountId?: StringFilter<"Account"> | string
     refreshToken?: StringNullableFilter<"Account"> | string | null
     accessToken?: StringNullableFilter<"Account"> | string | null
     expiresAt?: IntFilter<"Account"> | number
@@ -4786,6 +4803,7 @@ export namespace Prisma {
     id?: SortOrder
     type?: SortOrder
     provider?: SortOrder
+    providerAccountId?: SortOrder
     refreshToken?: SortOrderInput | SortOrder
     accessToken?: SortOrderInput | SortOrder
     expiresAt?: SortOrder
@@ -4806,6 +4824,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Account"> | string
     type?: StringWithAggregatesFilter<"Account"> | string
     provider?: StringWithAggregatesFilter<"Account"> | string
+    providerAccountId?: StringWithAggregatesFilter<"Account"> | string
     refreshToken?: StringNullableWithAggregatesFilter<"Account"> | string | null
     accessToken?: StringNullableWithAggregatesFilter<"Account"> | string | null
     expiresAt?: IntWithAggregatesFilter<"Account"> | number
@@ -4982,6 +5001,7 @@ export namespace Prisma {
     id?: string
     type: string
     provider: string
+    providerAccountId: string
     refreshToken?: string | null
     accessToken?: string | null
     expiresAt: number
@@ -4994,6 +5014,7 @@ export namespace Prisma {
     id?: string
     type: string
     provider: string
+    providerAccountId: string
     refreshToken?: string | null
     accessToken?: string | null
     expiresAt: number
@@ -5006,6 +5027,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
     provider?: StringFieldUpdateOperationsInput | string
+    providerAccountId?: StringFieldUpdateOperationsInput | string
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     accessToken?: NullableStringFieldUpdateOperationsInput | string | null
     expiresAt?: IntFieldUpdateOperationsInput | number
@@ -5018,6 +5040,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
     provider?: StringFieldUpdateOperationsInput | string
+    providerAccountId?: StringFieldUpdateOperationsInput | string
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     accessToken?: NullableStringFieldUpdateOperationsInput | string | null
     expiresAt?: IntFieldUpdateOperationsInput | number
@@ -5030,6 +5053,7 @@ export namespace Prisma {
     id?: string
     type: string
     provider: string
+    providerAccountId: string
     refreshToken?: string | null
     accessToken?: string | null
     expiresAt: number
@@ -5042,6 +5066,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
     provider?: StringFieldUpdateOperationsInput | string
+    providerAccountId?: StringFieldUpdateOperationsInput | string
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     accessToken?: NullableStringFieldUpdateOperationsInput | string | null
     expiresAt?: IntFieldUpdateOperationsInput | number
@@ -5053,6 +5078,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
     provider?: StringFieldUpdateOperationsInput | string
+    providerAccountId?: StringFieldUpdateOperationsInput | string
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     accessToken?: NullableStringFieldUpdateOperationsInput | string | null
     expiresAt?: IntFieldUpdateOperationsInput | number
@@ -5346,6 +5372,7 @@ export namespace Prisma {
     id?: SortOrder
     type?: SortOrder
     provider?: SortOrder
+    providerAccountId?: SortOrder
     refreshToken?: SortOrder
     accessToken?: SortOrder
     expiresAt?: SortOrder
@@ -5362,6 +5389,7 @@ export namespace Prisma {
     id?: SortOrder
     type?: SortOrder
     provider?: SortOrder
+    providerAccountId?: SortOrder
     refreshToken?: SortOrder
     accessToken?: SortOrder
     expiresAt?: SortOrder
@@ -5374,6 +5402,7 @@ export namespace Prisma {
     id?: SortOrder
     type?: SortOrder
     provider?: SortOrder
+    providerAccountId?: SortOrder
     refreshToken?: SortOrder
     accessToken?: SortOrder
     expiresAt?: SortOrder
@@ -5747,6 +5776,7 @@ export namespace Prisma {
     id?: string
     type: string
     provider: string
+    providerAccountId: string
     refreshToken?: string | null
     accessToken?: string | null
     expiresAt: number
@@ -5758,6 +5788,7 @@ export namespace Prisma {
     id?: string
     type: string
     provider: string
+    providerAccountId: string
     refreshToken?: string | null
     accessToken?: string | null
     expiresAt: number
@@ -5798,6 +5829,7 @@ export namespace Prisma {
     id?: StringFilter<"Account"> | string
     type?: StringFilter<"Account"> | string
     provider?: StringFilter<"Account"> | string
+    providerAccountId?: StringFilter<"Account"> | string
     refreshToken?: StringNullableFilter<"Account"> | string | null
     accessToken?: StringNullableFilter<"Account"> | string | null
     expiresAt?: IntFilter<"Account"> | number
@@ -5882,6 +5914,7 @@ export namespace Prisma {
     id?: string
     type: string
     provider: string
+    providerAccountId: string
     refreshToken?: string | null
     accessToken?: string | null
     expiresAt: number
@@ -5893,6 +5926,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
     provider?: StringFieldUpdateOperationsInput | string
+    providerAccountId?: StringFieldUpdateOperationsInput | string
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     accessToken?: NullableStringFieldUpdateOperationsInput | string | null
     expiresAt?: IntFieldUpdateOperationsInput | number
@@ -5904,6 +5938,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
     provider?: StringFieldUpdateOperationsInput | string
+    providerAccountId?: StringFieldUpdateOperationsInput | string
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     accessToken?: NullableStringFieldUpdateOperationsInput | string | null
     expiresAt?: IntFieldUpdateOperationsInput | number
@@ -5915,6 +5950,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
     provider?: StringFieldUpdateOperationsInput | string
+    providerAccountId?: StringFieldUpdateOperationsInput | string
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     accessToken?: NullableStringFieldUpdateOperationsInput | string | null
     expiresAt?: IntFieldUpdateOperationsInput | number

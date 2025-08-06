@@ -13,6 +13,7 @@ import { verify } from 'argon2';
 import { ConfigService } from '@nestjs/config';
 import { ProviderService } from '@/provider/provider.service';
 import { PrismaService } from '@/prisma/prisma.service';
+import { EmailConfirmationService } from './email-confirmation/email-confirmation.service';
 
 @Injectable()
 export class AuthService {
@@ -21,6 +22,7 @@ export class AuthService {
 		private readonly userService: UserService,
 		private readonly configService: ConfigService,
 		private readonly providerService: ProviderService,
+		private readonly emailConfirmationService: EmailConfirmationService,
 	) {}
 
 	public async register(req: Request, dto: RegisterDto) {
@@ -42,7 +44,11 @@ export class AuthService {
 			isVerified: false,
 		});
 
-		return this.saveSession(req, newUser);
+		await this.emailConfirmationService.sendVerificationToken(newUser);
+
+		return {
+			message: `You have successfully registered. Confirmation email has been sent to ${email}. Please check your email.`,
+		};
 	}
 
 	public async login(req: Request, dto: LoginDto) {
@@ -59,6 +65,14 @@ export class AuthService {
 
 		if (!isPasswordMatch) {
 			throw new UnauthorizedException(`Password not match. Please try again`);
+		}
+
+		if (!user.isVerified) {
+			await this.emailConfirmationService.sendVerificationToken(user);
+
+			throw new UnauthorizedException(
+				`Please confirm your email to login. Please check your email.`,
+			);
 		}
 
 		return this.saveSession(req, user);
@@ -79,9 +93,9 @@ export class AuthService {
 			);
 		}
 
-		const accounts = await this.prismaService.account.findUnique({
+		const accounts = await this.prismaService.account.findFirst({
 			where: {
-				id: profile.id,
+				providerAccountId: profile.id,
 				provider: profile.provider,
 			},
 		});
@@ -107,6 +121,7 @@ export class AuthService {
 				data: {
 					userId: user.id,
 					type: 'oauth',
+					providerAccountId: profile.id,
 					provider: profile.provider,
 					accessToken: profile.access_token,
 					refreshToken: profile.refresh_token,
@@ -135,7 +150,7 @@ export class AuthService {
 		});
 	}
 
-	private async saveSession(req: Request, user: User) {
+	public async saveSession(req: Request, user: User) {
 		return new Promise((resolve, reject) => {
 			req.session.userId = user.id;
 

@@ -1,3 +1,4 @@
+import { UnauthorizedException } from '@nestjs/common';
 import { BaseOAuthService } from './base-oauth.service';
 import { TypeProviderOptions, TypeUserInfo } from './types';
 
@@ -18,6 +19,7 @@ export class GitHubProvider extends BaseOAuthService {
 		data: GitHubUserProfile,
 	): Promise<TypeUserInfo> {
 		const email = await this.fetchPrimaryEmail(data.access_token);
+		if (!email) throw new UnauthorizedException('Email not verified');
 
 		const userInfo: Omit<TypeUserInfo, 'provider'> = {
 			id: data.id.toString(),
