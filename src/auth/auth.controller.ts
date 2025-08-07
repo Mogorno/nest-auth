@@ -78,9 +78,4 @@ export class AuthController {
 	) {
 		return this.authService.logout(req, res);
 	}
-
-	@Get()
-	public async getMe() {
-		return Promise.resolve('Hello world');
-	}
 }
