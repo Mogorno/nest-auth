@@ -2,7 +2,11 @@ import { MailerService } from '@nestjs-modules/mailer';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { render } from '@react-email/components';
-import { ConfirmationTemplate } from './templates';
+import {
+	ConfirmationTemplate,
+	ResetPasswordTemplate,
+	TwoFactorAuthTemplate,
+} from './templates';
 import * as React from 'react';
 import { parseStrArray } from '@/shared/utils';
 
@@ -34,5 +38,31 @@ export class MailService {
 		);
 
 		return this.sendMail(email, 'Confirm your email', html);
+	}
+
+	public async sendResetPasswordMail(
+		email: string,
+		token: string,
+	): ReturnType<MailerService['sendMail']> {
+		const domain = this.configService.getOrThrow<string>(
+			parseStrArray('ALLOWED_ORIGINS')[0],
+		);
+
+		const html = await render(
+			React.createElement(ResetPasswordTemplate, { domain, token }),
+		);
+
+		return this.sendMail(email, 'Reset your password', html);
+	}
+
+	public async sendTwoFactorAuthMail(
+		email: string,
+		token: string,
+	): ReturnType<MailerService['sendMail']> {
+		const html = await render(
+			React.createElement(TwoFactorAuthTemplate, { token }),
+		);
+
+		return this.sendMail(email, 'Your 2FA Code', html);
 	}
 }

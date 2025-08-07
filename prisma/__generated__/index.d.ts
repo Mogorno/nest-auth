@@ -52,7 +52,7 @@ export type AuthMethod = (typeof AuthMethod)[keyof typeof AuthMethod]
 
 export const TokenType: {
   VERIFICATION: 'VERIFICATION',
-  TWO_FACTOR: 'TWO_FACTOR',
+  TWO_FACTOR_AUTH: 'TWO_FACTOR_AUTH',
   PASSWORD_RESET: 'PASSWORD_RESET'
 };
 

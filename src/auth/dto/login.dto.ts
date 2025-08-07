@@ -2,6 +2,7 @@ import { User } from '@prisma/__generated__';
 import {
 	IsEmail,
 	IsNotEmpty,
+	IsOptional,
 	IsString,
 	MaxLength,
 	MinLength,
@@ -21,4 +22,8 @@ export class LoginDto implements Login {
 	@MinLength(6)
 	@MaxLength(128)
 	password: string;
+
+	@IsOptional()
+	@IsString()
+	code?: string;
 }

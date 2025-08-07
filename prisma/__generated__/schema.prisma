@@ -21,7 +21,7 @@ enum AuthMethod {
 
 enum TokenType {
   VERIFICATION
-  TWO_FACTOR
+  TWO_FACTOR_AUTH
   PASSWORD_RESET
 }
 

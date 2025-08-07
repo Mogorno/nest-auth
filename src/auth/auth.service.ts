@@ -14,6 +14,7 @@ import { ConfigService } from '@nestjs/config';
 import { ProviderService } from '@/provider/provider.service';
 import { PrismaService } from '@/prisma/prisma.service';
 import { EmailConfirmationService } from './email-confirmation/email-confirmation.service';
+import { TwoFactorAuthService } from './two-factor-auth/two-factor-auth.service';
 
 @Injectable()
 export class AuthService {
@@ -23,6 +24,7 @@ export class AuthService {
 		private readonly configService: ConfigService,
 		private readonly providerService: ProviderService,
 		private readonly emailConfirmationService: EmailConfirmationService,
+		private readonly twoFactorAuthService: TwoFactorAuthService,
 	) {}
 
 	public async register(req: Request, dto: RegisterDto) {
@@ -44,7 +46,7 @@ export class AuthService {
 			isVerified: false,
 		});
 
-		await this.emailConfirmationService.sendVerificationToken(newUser);
+		await this.emailConfirmationService.sendVerificationToken(newUser.email);
 
 		return {
 			message: `You have successfully registered. Confirmation email has been sent to ${email}. Please check your email.`,
@@ -52,7 +54,7 @@ export class AuthService {
 	}
 
 	public async login(req: Request, dto: LoginDto) {
-		const { email, password } = dto;
+		const { email, password, code } = dto;
 		const user = await this.userService.findByEmail(email);
 
 		if (!user || !user.password) {
@@ -68,11 +70,23 @@ export class AuthService {
 		}
 
 		if (!user.isVerified) {
-			await this.emailConfirmationService.sendVerificationToken(user);
+			await this.emailConfirmationService.sendVerificationToken(user.email);
 
 			throw new UnauthorizedException(
 				`Please confirm your email to login. Please check your email.`,
 			);
+		}
+
+		if (user.isTwoFactorEnabled) {
+			if (!code) {
+				await this.twoFactorAuthService.sendTwoFactorAuthToken(user.email);
+
+				return {
+					message: `Please check your email for two factor authentication code`,
+				};
+			}
+
+			await this.twoFactorAuthService.validateTwoFactorToken(user.email, code);
 		}
 
 		return this.saveSession(req, user);

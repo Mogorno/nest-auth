@@ -16,6 +16,7 @@ const timeUnitsVariantsMs = {
 	h: timeUnitsMs.hour,
 	hour: timeUnitsMs.hour,
 	hours: timeUnitsMs.hour,
+	m: timeUnitsMs.minute,
 	min: timeUnitsMs.minute,
 	minute: timeUnitsMs.minute,
 	minutes: timeUnitsMs.minute,
@@ -25,7 +26,8 @@ const timeUnitsVariantsMs = {
 };
 
 export const timeToMs = (input: string): number => {
-	const regex = /(\d+)\s*(w|weeks?|d|days?|h|hours?|min|minutes?|s|seconds?)/gi;
+	const regex =
+		/(\d+)\s*(w|weeks?|d|days?|h|hours?|m|min|minutes?|s|seconds?)/gi;
 	let totalMs = 0;
 	let match: RegExpExecArray | null;
 
